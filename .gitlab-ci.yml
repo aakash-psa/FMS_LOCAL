@@ -1,0 +1,225 @@
+stages:
+  - install
+  - test
+  - build
+  - container-scan
+  - deploy
+  - provision
+
+variables:
+  CUSTOM_RUNNER: "testing"
+  CLOUD_SDK_IMAGE: "gcr.io/google.com/cloudsdktool/cloud-sdk:latest"
+
+.dev-variables:
+  variables:
+    CUSTOM_RUNNER: "testing"
+    GCP_ACCOUNT_ID: "ent-svc-fms-nonprod"
+    GCP_REGION: 'me-central2'
+    TARGET_ENV: 'dev'
+    CUSTOM_TESTING_SCRIPT: ""
+    DOCKERFILE_PATH: "app/backend/Dockerfile"
+    APP_NAME: "feasibility-modeling-solution"
+    CONTAINER_PORT: 80
+    SERVICE_ACCOUNT: "fms-service-account@ent-svc-fms-nonprod.iam.gserviceaccount.com"
+    INGRESS: "INGRESS_TRAFFIC_ALL"
+    DEPLOY_TYPE: "cloudrun"
+    ADDINS_ENV_VARS: "REACT_APP_MSAL_CLIENT_ID=96de8dd7-090c-4d6e-b6b6-d9d11fb5fdf0,REACT_APP_MSAL_AUTHORITY=https://login.microsoftonline.com/b15060d0-2a92-49b4-9f5a-70ce4ce334a1,REACT_APP_MSAL_REDIRECT_URI=https://dev-fms.roshn.sa/taskpane.html,REACT_APP_MSAL_POST_LOGOUT_REDIRECT_URI=/,REACT_API_BASE_URL=https://api-ent-test.roshn.sa/"
+    ADMIN_ENV_VARS: "VITE_MSAL_CLIENT_ID=96de8dd7-090c-4d6e-b6b6-d9d11fb5fdf0,VITE_MSAL_AUTHORITY=https://login.microsoftonline.com/b15060d0-2a92-49b4-9f5a-70ce4ce334a1,VITE_MSAL_REDIRECT_URI=https://dev-fms.roshn.sa/admin/,VITE_MSAL_POST_LOGOUT_REDIRECT_URI=https://dev-fms.roshn.sa/admin/,VITE_API_BASE_URL=https://api-ent-test.roshn.sa/"
+    BACKEND_ENV_VARS: "TARGET_ENV=dev,DB_HOST=10.12.111.3,DB_USER=postgres,DBNAME=postgres,DB_PORT=5432,DJANGO_ALLOWED_HOSTS=10.12.98.53,AZURE_TENANT_ID=b15060d0-2a92-49b4-9f5a-70ce4ce334a1,AZURE_CLIENT_ID=96de8dd7-090c-4d6e-b6b6-d9d11fb5fdf0,GCS_BUCKET_NAME=fms-bucket-storage"
+    BACKEND_SECRETS: "DB_PASSWORD=fms-sql-db-dev:latest"
+    CONFIGMAP_DATA: |
+      NODE_ENV=development
+
+.uat-variables:
+   variables:
+    CUSTOM_RUNNER: "testing"
+    GCP_ACCOUNT_ID: "ent-svc-fms-nonprod"
+    GCP_REGION: 'me-central2'
+    TARGET_ENV: 'uat'
+    CUSTOM_TESTING_SCRIPT: ""
+    DOCKERFILE_PATH: "app/backend/Dockerfile"
+    APP_NAME: "feasibility-modeling-solution"
+    CONTAINER_PORT: 80
+    SERVICE_ACCOUNT: "fms-service-account@ent-svc-fms-nonprod.iam.gserviceaccount.com"
+    INGRESS: "INGRESS_TRAFFIC_ALL"
+    DEPLOY_TYPE: "cloudrun"
+    ADDINS_ENV_VARS: "REACT_APP_MSAL_CLIENT_ID=96de8dd7-090c-4d6e-b6b6-d9d11fb5fdf0,REACT_APP_MSAL_AUTHORITY=https://login.microsoftonline.com/b15060d0-2a92-49b4-9f5a-70ce4ce334a1,REACT_APP_MSAL_REDIRECT_URI=https://dev-fms.roshn.sa/taskpane.html,REACT_APP_MSAL_POST_LOGOUT_REDIRECT_URI=/,REACT_API_BASE_URL=http://10.12.98.12/"
+    ADMIN_ENV_VARS: "VITE_MSAL_CLIENT_ID=96de8dd7-090c-4d6e-b6b6-d9d11fb5fdf0,VITE_MSAL_AUTHORITY=https://login.microsoftonline.com/b15060d0-2a92-49b4-9f5a-70ce4ce334a1,VITE_MSAL_REDIRECT_URI=https://dev-fms.roshn.sa/admin/,VITE_MSAL_POST_LOGOUT_REDIRECT_URI=https://dev-fms.roshn.sa/admin/,VITE_API_BASE_URL=http://10.12.98.12/"
+    BACKEND_ENV_VARS: "TARGET_ENV=uat,DB_HOST=10.12.111.6,DB_USER=postgres,DBNAME=postgres,DB_PORT=5432,DJANGO_ALLOWED_HOSTS=10.12.98.12,AZURE_TENANT_ID=b15060d0-2a92-49b4-9f5a-70ce4ce334a1,AZURE_CLIENT_ID=96de8dd7-090c-4d6e-b6b6-d9d11fb5fdf0,GCS_BUCKET_NAME=fms-bucket-storage-uat"
+    BACKEND_SECRETS: "DB_PASSWORD=fms-sql-db-uat:latest"
+    CONFIGMAP_DATA: |
+      NODE_ENV=uat
+
+.prod-variables:
+  variables:
+
+
+install:
+  stage: install
+  tags: 
+    - ${CUSTOM_RUNNER}
+ # before_script: apk upgrade --no-cache && apk add --no-cache libc6-compat ca-certificates
+  script: |
+          echo ${TARGET_ENV}
+          echo "COMPLETED INSTALLING DEPENDENCIES!"
+
+test:
+  stage: test
+  tags: 
+    - ${CUSTOM_RUNNER}
+  script: 
+    - |
+      if [[ -n "$CUSTOM_TESTING_SCRIPT" ]]; then
+        echo "running testing scripts"
+        ${CUSTOM_TESTING_SCRIPT}
+      fi
+      echo "COMPLETED TESTING!"
+  needs: [install]
+
+# secret_detection:
+#   stage: secret-detection
+#   tags: 
+#     - ${CUSTOM_RUNNER}
+# # extends: .secret_detection
+#   script: echo "COMPLETED SECRET DETECTION!"
+#   rules:
+#     - if: '$SECRET_DETECTION_DISABLED == "false"'
+
+
+build_docker_dev:
+  stage: build
+  extends: .dev-variables
+  image: $CLOUD_SDK_IMAGE
+  tags: 
+    - ${CUSTOM_RUNNER}
+  before_script: 
+    - gcloud config set project $GCP_ACCOUNT_ID
+    - apt-get update && apt-get install -y docker.io
+    - gcloud auth configure-docker ${GCP_REGION}-docker.pkg.dev --quiet
+  script:
+   - |
+      echo "Locating aritfact repository..."
+      if gcloud artifacts repositories list | grep $APP_NAME; then
+        echo "Artifact repository exists!"
+      else
+        gcloud artifacts repositories create ${APP_NAME} --repository-format=Docker --location=${GCP_REGION} --project=${GCP_ACCOUNT_ID}
+        echo "Artifact repository Created!"
+      fi
+      echo "Uploading Docker image..."
+      IMAGE_BASE="${GCP_REGION}-docker.pkg.dev/${GCP_ACCOUNT_ID}/${APP_NAME}"
+      BACKEND_IMAGE_NAME="${IMAGE_BASE}/${APP_NAME}-be-${TARGET_ENV}:${CI_COMMIT_SHA}"
+      ADMIN_IMAGE_NAME="${IMAGE_BASE}/${APP_NAME}-admin-${TARGET_ENV}:${CI_COMMIT_SHA}"
+      ADDIN_IMAGE_NAME="${IMAGE_BASE}/${APP_NAME}-addin-${TARGET_ENV}:${CI_COMMIT_SHA}"
+      docker build -f ${DOCKERFILE_PATH} -t ${BACKEND_IMAGE_NAME} --build-arg DJANGO_ALLOWED_HOSTS=10.12.98.53 app/backend
+      docker build -f ./app/admin/Dockerfile -t ${ADMIN_IMAGE_NAME}  --build-arg VITE_MSAL_CLIENT_ID=96de8dd7-090c-4d6e-b6b6-d9d11fb5fdf0 --build-arg VITE_MSAL_AUTHORITY=https://login.microsoftonline.com/b15060d0-2a92-49b4-9f5a-70ce4ce334a1 --build-arg VITE_MSAL_REDIRECT_URI=https://dev-fms.roshn.sa/admin/ --build-arg VITE_API_BASE_URL=https://api-ent-test.roshn.sa/ --build-arg VITE_MSAL_POST_LOGOUT_REDIRECT_URI=/admin/ app/admin
+      docker build -f ./app/addins/Dockerfile -t ${ADDIN_IMAGE_NAME} --build-arg REACT_APP_MSAL_CLIENT_ID=96de8dd7-090c-4d6e-b6b6-d9d11fb5fdf0 --build-arg REACT_APP_MSAL_AUTHORITY=https://login.microsoftonline.com/b15060d0-2a92-49b4-9f5a-70ce4ce334a1 --build-arg REACT_APP_MSAL_REDIRECT_URI=https://dev-fms.roshn.sa/taskpane.html --build-arg REACT_API_BASE_URL=https://api-ent-test.roshn.sa/ --build-arg REACT_APP_MSAL_POST_LOGOUT_REDIRECT_URI=/ app/addins
+      docker push ${BACKEND_IMAGE_NAME}
+      docker push ${ADMIN_IMAGE_NAME}
+      docker push ${ADDIN_IMAGE_NAME}
+      echo "Docker images created!"
+      echo $BACKEND_IMAGE_NAME > backend_image.txt
+      echo $ADMIN_IMAGE_NAME > admin_image.txt
+      echo $ADDIN_IMAGE_NAME > addin_image.txt
+  rules:
+   - if: '$CI_COMMIT_BRANCH == "main"'
+  artifacts:
+    paths:
+      - backend_image.txt
+      - admin_image.txt
+      - addin_image.txt
+  
+container_scan:
+  stage: container-scan
+  tags: 
+    - ${CUSTOM_RUNNER}
+  script: 
+    - echo "SCANNING CONTAINER..."
+    - echo "COMPLETED CONTAINER SCAN!"
+
+deploy_cloudrun_dev:
+  stage: provision
+  extends: .dev-variables
+  tags: 
+    - ${CUSTOM_RUNNER}
+  image:
+    name: $CLOUD_SDK_IMAGE
+  needs: 
+    - job: build_docker_dev
+      optional: true
+  before_script:
+    - gcloud config set project $GCP_ACCOUNT_ID
+  script:
+    - |
+      gcloud run deploy $APP_NAME --image=$(cat backend_image.txt) --region=$GCP_REGION --platform=managed --port=$CONTAINER_PORT --ingress internal-and-cloud-load-balancing --allow-unauthenticated --set-env-vars "$BACKEND_ENV_VARS" --update-secrets "$BACKEND_SECRETS" --service-account "$SERVICE_ACCOUNT"
+      gcloud run deploy feasibility-tool-admin --image=$(cat admin_image.txt) --region=$GCP_REGION --platform=managed --port=$CONTAINER_PORT --ingress internal-and-cloud-load-balancing --allow-unauthenticated --set-env-vars "$ADMIN_ENV_VARS" --service-account "$SERVICE_ACCOUNT"
+      gcloud run deploy feasibility-tool-addin --image=$(cat addin_image.txt) --region=$GCP_REGION --platform=managed --port=$CONTAINER_PORT --ingress internal-and-cloud-load-balancing --allow-unauthenticated --set-env-vars "$ADDINS_ENV_VARS" --service-account "$SERVICE_ACCOUNT"
+  rules:
+   - if: '$CI_COMMIT_BRANCH == "main"'
+
+#UAT PIPELINE
+
+build_docker_uat:
+  stage: build
+  extends: .uat-variables
+  image: $CLOUD_SDK_IMAGE
+  tags: 
+    - ${CUSTOM_RUNNER}
+  before_script: 
+    - gcloud config set project $GCP_ACCOUNT_ID
+    - apt-get update && apt-get install -y docker.io
+    - gcloud auth configure-docker ${GCP_REGION}-docker.pkg.dev --quiet
+  script:
+   - |
+      echo "Locating aritfact repository..."
+      if gcloud artifacts repositories list | grep $APP_NAME; then
+        echo "Artifact repository exists!"
+      else
+        gcloud artifacts repositories create ${APP_NAME} --repository-format=Docker --location=${GCP_REGION} --project=${GCP_ACCOUNT_ID}
+        echo "Artifact repository Created!"
+      fi
+      echo "Uploading Docker image..."
+      IMAGE_BASE="${GCP_REGION}-docker.pkg.dev/${GCP_ACCOUNT_ID}/${APP_NAME}"
+      BACKEND_IMAGE_NAME="${IMAGE_BASE}/${APP_NAME}-be-${TARGET_ENV}:${CI_COMMIT_SHA}"
+      ADMIN_IMAGE_NAME="${IMAGE_BASE}/${APP_NAME}-admin-${TARGET_ENV}:${CI_COMMIT_SHA}"
+      ADDIN_IMAGE_NAME="${IMAGE_BASE}/${APP_NAME}-addin-${TARGET_ENV}:${CI_COMMIT_SHA}"
+      docker build -f ${DOCKERFILE_PATH} -t ${BACKEND_IMAGE_NAME} --build-arg DJANGO_ALLOWED_HOSTS=10.12.98.12 app/backend
+      docker build -f ./app/admin/Dockerfile -t ${ADMIN_IMAGE_NAME} --build-arg VITE_MSAL_CLIENT_ID=96de8dd7-090c-4d6e-b6b6-d9d11fb5fdf0 --build-arg VITE_MSAL_AUTHORITY=https://login.microsoftonline.com/b15060d0-2a92-49b4-9f5a-70ce4ce334a1 --build-arg VITE_MSAL_REDIRECT_URI=https://uat-fms.roshn.sa/admin/ --build-arg VITE_API_BASE_URL=http://10.12.98.12/ --build-arg VITE_MSAL_POST_LOGOUT_REDIRECT_URI=/admin/ app/admin
+      docker build -f ./app/addins/Dockerfile -t ${ADDIN_IMAGE_NAME} --build-arg REACT_APP_MSAL_CLIENT_ID=96de8dd7-090c-4d6e-b6b6-d9d11fb5fdf0 --build-arg REACT_APP_MSAL_AUTHORITY=https://login.microsoftonline.com/b15060d0-2a92-49b4-9f5a-70ce4ce334a1 --build-arg REACT_APP_MSAL_REDIRECT_URI=https://uat-fms.roshn.sa/taskpane.html --build-arg REACT_API_BASE_URL=http://10.12.98.12/ --build-arg REACT_APP_MSAL_POST_LOGOUT_REDIRECT_URI=/ app/addins
+      docker push ${BACKEND_IMAGE_NAME}
+      docker push ${ADMIN_IMAGE_NAME}
+      docker push ${ADDIN_IMAGE_NAME}
+      echo "Docker images created!"
+      echo $BACKEND_IMAGE_NAME > backend_image.txt
+      echo $ADMIN_IMAGE_NAME > admin_image.txt
+      echo $ADDIN_IMAGE_NAME > addin_image.txt
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^uat-\d+\.\d+\.\d+-rc\d+$/'
+  artifacts:
+    paths:
+      - backend_image.txt
+      - admin_image.txt
+      - addin_image.txt
+  
+deploy_cloudrun_uat:
+  stage: provision
+  extends: .uat-variables
+  tags: 
+    - ${CUSTOM_RUNNER}
+  image:
+    name: $CLOUD_SDK_IMAGE
+  needs: 
+    - job: build_docker_uat
+      optional: true
+  before_script:
+    - gcloud config set project $GCP_ACCOUNT_ID
+  script:
+    - |
+      gcloud run deploy ${APP_NAME}-uat --image=$(cat backend_image.txt) --region=$GCP_REGION --platform=managed --port=$CONTAINER_PORT --ingress internal-and-cloud-load-balancing --allow-unauthenticated --service-account "$SERVICE_ACCOUNT" --set-env-vars "$BACKEND_ENV_VARS" --update-secrets "$BACKEND_SECRETS"
+      gcloud run deploy feasibility-tool-admin-uat --image=$(cat admin_image.txt) --region=$GCP_REGION --platform=managed --port=$CONTAINER_PORT --ingress internal-and-cloud-load-balancing --allow-unauthenticated --service-account "$SERVICE_ACCOUNT"
+      gcloud run deploy feasibility-tool-addin-uat --image=$(cat addin_image.txt) --region=$GCP_REGION --platform=managed --port=$CONTAINER_PORT --ingress internal-and-cloud-load-balancing --allow-unauthenticated --service-account "$SERVICE_ACCOUNT"
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^uat-\d+\.\d+\.\d+-rc\d+$/'
+
+
+
+#PRODUCTION PIPELINE

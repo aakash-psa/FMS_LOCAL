@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+@import './styles/theme.css';
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: 'IBM Plex Sans Arabic', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: var(--accent-color);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--accent-hover);
+}
+
+body {
+  margin: 0;
+  display: block;
+  place-items: initial;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: none;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--color-brand-blue);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+button:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+button:active {
+  transform: translateY(0);
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+button:focus,
+button:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+input,
+select,
+textarea {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.5em;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 1px;
+}
+
+table {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+th {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-primary);
+}
+
+td {
+  border-color: var(--border-color) !important;
+}

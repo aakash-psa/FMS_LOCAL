@@ -1,0 +1,63 @@
+/* Catppuccin Frappe — soothing professional dark theme for Preferred Square FMS */
+:root {
+  /* Frappe palette */
+  --color-white: #FFFFFF;
+  --color-dark-navy: #303446;        /* Frappe Base — main canvas */
+  --color-midnight-blue: #292c3c;    /* Frappe Mantle — recessed bg */
+  --color-royal-blue: #414559;       /* Frappe Surface0 — cards/panels */
+  --color-brand-blue: #8caaee;       /* Frappe Blue — PS primary */
+  --color-light-indigo: #babbf1;     /* Frappe Lavender — soft accent */
+  --color-delft-blue: #626880;       /* Frappe Surface2 — borders */
+  --color-sky-blue: #85c1dc;         /* Frappe Sapphire — info */
+  --color-indigo: #4D018F;
+  --color-ps-purple: #ca9ee6;        /* Frappe Mauve — PS secondary brand */
+  --color-error-dark: #e78284;       /* Frappe Red */
+  --color-error-light: #ea999c;      /* Frappe Maroon */
+  --color-battleship-gray: #737994;  /* Frappe Overlay0 */
+  --color-lavender-mist: #a5adce;    /* Frappe Subtext0 */
+
+  /* Semantic */
+  --bg-primary: var(--color-dark-navy);
+  --bg-secondary: var(--color-midnight-blue);
+  --bg-tertiary: var(--color-royal-blue);
+  --text-primary: #c6d0f5;           /* Frappe Text */
+  --text-secondary: var(--color-lavender-mist);
+  --border-color: rgba(98, 104, 128, 0.4);
+  --accent-color: var(--color-light-indigo);
+  --accent-hover: var(--color-brand-blue);
+  --success-color: var(--color-brand-blue);
+  --error-color: var(--color-error-dark);
+  --warning-color: var(--color-ps-purple);
+  --info-color: var(--color-sky-blue);
+
+  --success-bg: rgba(140, 170, 238, 0.12);
+  --success-text: var(--color-light-indigo);
+  --error-bg: rgba(231, 130, 132, 0.15);
+  --error-text: var(--color-error-light);
+  --warning-bg: rgba(202, 158, 230, 0.12);
+  --warning-text: var(--color-ps-purple);
+  --info-bg: rgba(133, 193, 220, 0.12);
+  --info-text: var(--color-sky-blue);
+
+  --modal-overlay: rgba(35, 38, 52, 0.88);
+  --table-row-hover: rgba(140, 170, 238, 0.08);
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+  --icon-primary: var(--color-light-indigo);
+  --icon-secondary: var(--text-secondary);
+  --icon-success: var(--color-brand-blue);
+  --icon-error: var(--color-error-light);
+  --icon-warning: var(--color-ps-purple);
+  --icon-info: var(--color-sky-blue);
+}
+
+html,
+body {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  color-scheme: dark;
+}
+
+.iconify {
+  vertical-align: middle;
+}

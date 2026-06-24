@@ -1,0 +1,32 @@
+{
+  "name": "react_poc",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@azure/msal-browser": "4.26.1",
+    "@azure/msal-react": "3.0.21",
+    "@iconify/react": "^5.0.3",
+    "dotenv": "17.2.3",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-router-dom": "^7.18.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react-swc": "^4.2.2",
+    "eslint": "^9.39.2",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.22",
+    "globals": "^16.5.0",
+    "vite": "^7.3.0"
+  }
+}
