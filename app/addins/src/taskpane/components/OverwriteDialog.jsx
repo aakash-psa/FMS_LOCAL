@@ -88,7 +88,7 @@ const OverwriteDialog = ({
               onChange={(e) => setSearch(e.target.value)}
               style={{
                 width: "100%",
-                backgroundColor: "#1e2a28",
+                backgroundColor: "var(--bg-secondary)",
                 color: "var(--text-primary)",
                 border: "1px solid var(--border-color)",
                 borderRadius: "6px",
@@ -106,7 +106,7 @@ const OverwriteDialog = ({
                 overflowY: "auto",
                 border: "1px solid var(--border-color)",
                 borderRadius: "6px",
-                backgroundColor: "#1e2a28",
+                backgroundColor: "var(--bg-secondary)",
               }}
             >
               {scenarios.length === 0 ? (

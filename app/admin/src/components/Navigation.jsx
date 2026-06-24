@@ -120,8 +120,8 @@ const Navigation = () => {
             onClick={handleLogout}
             style={{
               padding: "0.625rem 1.5rem",
-              background: "linear-gradient(135deg, var(--color-brand-blue) 0%, var(--color-light-indigo) 100%)",
-              color: "var(--color-dark-navy)",
+              background: "linear-gradient(135deg, var(--color-btn-primary) 0%, var(--color-btn-primary-hover) 100%)",
+              color: "var(--color-white)",
               border: "none",
               borderRadius: "300px",
               cursor: "pointer",
@@ -142,7 +142,7 @@ const Navigation = () => {
               e.currentTarget.style.boxShadow = "0 4px 12px rgba(140, 170, 238, 0.25)";
             }}
             onMouseOut={(e) => {
-              e.currentTarget.style.background = "linear-gradient(135deg, var(--color-brand-blue) 0%, var(--color-light-indigo) 100%)";
+              e.currentTarget.style.background = "linear-gradient(135deg, var(--color-btn-primary) 0%, var(--color-btn-primary-hover) 100%)";
               e.currentTarget.style.transform = "translateY(0)";
               e.currentTarget.style.boxShadow = "0 2px 8px rgba(140, 170, 238, 0.15)";
             }}

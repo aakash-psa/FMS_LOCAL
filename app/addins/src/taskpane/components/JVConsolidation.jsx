@@ -115,7 +115,7 @@ const useStyles = makeStyles({
     maxWidth: "100%",
     boxSizing: "border-box",
     fontSize: "12px",
-    background: "#2b3331",
+    background: "var(--bg-tertiary)",
     color: "var(--text-primary)",
     border: "1px solid var(--border-color)",
     borderRadius: "6px",

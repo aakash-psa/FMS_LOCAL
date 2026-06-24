@@ -293,12 +293,12 @@
 }
 
 .btn-primary {
-  background-color: var(--color-brand-blue);
+  background-color: var(--color-btn-primary);
   color: var(--color-white);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: var(--color-light-indigo);
+  background-color: var(--color-btn-primary-hover);
 }
 
 .btn-secondary {

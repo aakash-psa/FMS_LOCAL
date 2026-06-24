@@ -418,7 +418,7 @@ const ProjectManagement = () => {
           onClick={openCreateModal}
           style={{
             padding: "10px 20px",
-            backgroundColor: "var(--color-brand-blue)",
+            backgroundColor: "var(--color-btn-primary)",
             color: "var(--color-white)",
             border: "none",
             borderRadius: "4px",
@@ -787,7 +787,7 @@ const ProjectManagement = () => {
                               padding: "8px 14px",
                               fontSize: "12px",
                               border: "none",
-                              backgroundColor: "var(--color-brand-blue)",
+                              backgroundColor: "var(--color-btn-primary)",
                               color: "var(--color-white)",
                               borderRadius: "4px",
                               cursor: "pointer",
@@ -849,7 +849,7 @@ const ProjectManagement = () => {
                               padding: "8px 14px",
                               fontSize: "12px",
                               border: "none",
-                              backgroundColor: "var(--color-brand-blue)",
+                              backgroundColor: "var(--color-btn-primary)",
                               color: "var(--color-white)",
                               borderRadius: "4px",
                               cursor: "pointer",
@@ -889,7 +889,7 @@ const ProjectManagement = () => {
                               padding: "8px 14px",
                               fontSize: "12px",
                               border: "none",
-                              backgroundColor: "var(--color-brand-blue)",
+                              backgroundColor: "var(--color-btn-primary)",
                               color: "var(--color-white)",
                               borderRadius: "4px",
                               cursor: "pointer",
@@ -910,7 +910,7 @@ const ProjectManagement = () => {
                                 padding: "8px 14px",
                                 fontSize: "12px",
                                 border: "none",
-                                backgroundColor: "var(--color-brand-blue)",
+                                backgroundColor: "var(--color-btn-primary)",
                                 color: "var(--color-white)",
                                 borderRadius: "4px",
                                 cursor: "pointer",
@@ -1310,7 +1310,7 @@ const ProjectManagement = () => {
                 onClick={handleCreateProject}
                 style={{
                   padding: "8px 16px",
-                  backgroundColor: "var(--color-brand-blue)",
+                  backgroundColor: "var(--color-btn-primary)",
                   color: "var(--color-white)",
                   border: "none",
                   borderRadius: "4px",

@@ -637,7 +637,7 @@ const AssignUser = () => {
                           <button
                             style={{
                               padding: "6px 12px",
-                              backgroundColor: "var(--color-brand-blue)",
+                              backgroundColor: "var(--color-btn-primary)",
                               color: "var(--color-white)",
                               border: "none",
                               borderRadius: "4px",
@@ -821,7 +821,7 @@ const AssignUser = () => {
                 disabled={isProcessing}
                 style={{
                   padding: "10px 20px",
-                  backgroundColor: "var(--color-brand-blue)",
+                  backgroundColor: "var(--color-btn-primary)",
                   color: "var(--color-white)",
                   border: "none",
                   borderRadius: "6px",

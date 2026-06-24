@@ -12,6 +12,8 @@ const adminCssVars = {
   "--color-sky-blue": "#85c1dc",
   "--color-indigo": "#4D018F",
   "--color-ps-purple": "#ca9ee6",
+  "--color-btn-primary": "#4361ee",
+  "--color-btn-primary-hover": "#3451d1",
   "--color-error-dark": "#e78284",
   "--color-error-light": "#ea999c",
   "--color-battleship-gray": "#737994",

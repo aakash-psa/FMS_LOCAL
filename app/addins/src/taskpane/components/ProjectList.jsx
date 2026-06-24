@@ -124,7 +124,7 @@ const useStyles = makeStyles({
   },
   roshnCard: {
     marginBottom: "16px",
-    background: "#021a0d",
+    background: "var(--bg-secondary)",
     color: "#cfefd1",
     transition: "all 0.2s ease",
     padding: "18px 20px",
@@ -135,7 +135,7 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     minHeight: "92px",
     "&:hover": {
-      background: "#033024",
+      background: "var(--bg-tertiary)",
       transform: "translateY(-2px)",
       boxShadow: "0 12px 28px rgba(0, 0, 0, 0.16)",
     },

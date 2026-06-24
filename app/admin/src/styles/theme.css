@@ -11,6 +11,8 @@
   --color-sky-blue: #85c1dc;         /* Frappe Sapphire — info */
   --color-indigo: #4D018F;
   --color-ps-purple: #ca9ee6;        /* Frappe Mauve — PS secondary brand */
+  --color-btn-primary: #4361ee;      /* Deep indigo — dark button, white text readable */
+  --color-btn-primary-hover: #3451d1;
   --color-error-dark: #e78284;       /* Frappe Red */
   --color-error-light: #ea999c;      /* Frappe Maroon */
   --color-battleship-gray: #737994;  /* Frappe Overlay0 */
