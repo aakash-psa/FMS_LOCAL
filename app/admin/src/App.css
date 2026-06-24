@@ -77,10 +77,10 @@
 }
 
 .dashboard-card:hover {
-  background: linear-gradient(135deg, rgba(140, 170, 238, 0.15) 0%, var(--bg-tertiary) 100%);
+  background: linear-gradient(135deg, rgba(137, 180, 250, 0.15) 0%, var(--bg-tertiary) 100%);
   border-color: var(--color-light-indigo);
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(186, 187, 241, 0.1);
+  box-shadow: 0 20px 40px rgba(180, 190, 254, 0.1);
 }
 
 .dashboard-card h4 {

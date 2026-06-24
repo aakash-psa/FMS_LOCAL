@@ -1,52 +1,52 @@
 import { webDarkTheme } from "@fluentui/react-components";
 
-/* Catppuccin Frappe — all palette colors darkened 30% from base */
+/* Catppuccin Mocha — definitive dark theme for FMS Add-ins */
 const adminCssVars = {
   "--color-white": "#FFFFFF",
-  "--color-dark-navy": "#222431",
-  "--color-midnight-blue": "#1d1f2a",
-  "--color-royal-blue": "#2e303e",
-  "--color-brand-blue": "#6277a7",
-  "--color-light-indigo": "#8283a9",
-  "--color-delft-blue": "#45495a",
-  "--color-sky-blue": "#5d879a",
-  "--color-indigo": "#360164",
-  "--color-ps-purple": "#8d6fa1",
-  "--color-btn-primary": "#2f44a7",
-  "--color-btn-primary-hover": "#243992",
-  "--color-error-dark": "#a25b5c",
-  "--color-error-light": "#a46b6d",
-  "--color-battleship-gray": "#505568",
-  "--color-lavender-mist": "#737990",
-  "--bg-primary": "#222431",
-  "--bg-secondary": "#14161d",
-  "--bg-tertiary": "#20222b",
-  "--text-primary": "#8b92ac",
-  "--text-secondary": "#737990",
-  "--border-color": "rgba(69, 73, 90, 0.4)",
-  "--accent-color": "#8283a9",
-  "--accent-hover": "#6277a7",
-  "--success-color": "#6277a7",
-  "--error-color": "#a25b5c",
-  "--warning-color": "#8d6fa1",
-  "--info-color": "#5d879a",
-  "--success-bg": "rgba(98, 119, 167, 0.12)",
-  "--success-text": "#8283a9",
-  "--error-bg": "rgba(162, 91, 92, 0.15)",
-  "--error-text": "#a46b6d",
-  "--warning-bg": "rgba(141, 111, 161, 0.12)",
-  "--warning-text": "#8d6fa1",
-  "--info-bg": "rgba(93, 135, 154, 0.12)",
-  "--info-text": "#5d879a",
-  "--modal-overlay": "rgba(24, 27, 36, 0.88)",
-  "--table-row-hover": "rgba(98, 119, 167, 0.08)",
-  "--card-shadow": "0 2px 8px rgba(0, 0, 0, 0.25)",
-  "--icon-primary": "#8283a9",
-  "--icon-secondary": "#737990",
-  "--icon-success": "#6277a7",
-  "--icon-error": "#a46b6d",
-  "--icon-warning": "#8d6fa1",
-  "--icon-info": "#5d879a",
+  "--color-dark-navy": "#1e1e2e",        // Mocha Base
+  "--color-midnight-blue": "#181825",    // Mocha Mantle
+  "--color-royal-blue": "#313244",       // Mocha Surface0
+  "--color-brand-blue": "#89b4fa",       // Mocha Blue
+  "--color-light-indigo": "#b4befe",     // Mocha Lavender
+  "--color-delft-blue": "#6c7086",       // Mocha Overlay0
+  "--color-sky-blue": "#74c7ec",         // Mocha Sapphire
+  "--color-indigo": "#4D018F",
+  "--color-ps-purple": "#cba6f7",        // Mocha Mauve
+  "--color-btn-primary": "#45475a",      // Mocha Surface1 — dark button
+  "--color-btn-primary-hover": "#585b70", // Mocha Surface2 — hover lift
+  "--color-error-dark": "#f38ba8",       // Mocha Red
+  "--color-error-light": "#eba0ac",      // Mocha Maroon
+  "--color-battleship-gray": "#9399b2",  // Mocha Overlay2
+  "--color-lavender-mist": "#a6adc8",    // Mocha Subtext0
+  "--bg-primary": "#1e1e2e",
+  "--bg-secondary": "#181825",
+  "--bg-tertiary": "#313244",
+  "--text-primary": "#FFFFFF",
+  "--text-secondary": "#cdd6f4",         // Mocha Text — secondary
+  "--border-color": "rgba(108, 112, 134, 0.4)",
+  "--accent-color": "#b4befe",
+  "--accent-hover": "#89b4fa",
+  "--success-color": "#a6e3a1",          // Mocha Green
+  "--error-color": "#f38ba8",
+  "--warning-color": "#fab387",          // Mocha Peach
+  "--info-color": "#74c7ec",
+  "--success-bg": "rgba(166, 227, 161, 0.12)",
+  "--success-text": "#a6e3a1",
+  "--error-bg": "rgba(243, 139, 168, 0.15)",
+  "--error-text": "#eba0ac",
+  "--warning-bg": "rgba(250, 179, 135, 0.12)",
+  "--warning-text": "#fab387",
+  "--info-bg": "rgba(116, 199, 236, 0.12)",
+  "--info-text": "#74c7ec",
+  "--modal-overlay": "rgba(17, 17, 27, 0.88)",
+  "--table-row-hover": "rgba(137, 180, 250, 0.08)",
+  "--card-shadow": "0 2px 8px rgba(0, 0, 0, 0.35)",
+  "--icon-primary": "#b4befe",
+  "--icon-secondary": "#a6adc8",
+  "--icon-success": "#a6e3a1",
+  "--icon-error": "#eba0ac",
+  "--icon-warning": "#fab387",
+  "--icon-info": "#74c7ec",
 };
 
 export const applyAdminTheme = () => {
@@ -61,11 +61,11 @@ export const applyAdminTheme = () => {
 
 export const adminFluentTheme = {
   ...webDarkTheme,
-  colorBrandBackground: "#6277a7",
-  colorBrandBackgroundHover: "#2e303e",
-  colorBrandBackgroundPressed: "#1d1f2a",
-  colorBrandForeground1: "#8283a9",
-  colorBrandForeground2: "#737990",
-  colorBrandStroke1: "#6277a7",
-  colorBrandStroke2: "#8283a9",
+  colorBrandBackground: "#45475a",
+  colorBrandBackgroundHover: "#585b70",
+  colorBrandBackgroundPressed: "#181825",
+  colorBrandForeground1: "#b4befe",
+  colorBrandForeground2: "#a6adc8",
+  colorBrandStroke1: "#89b4fa",
+  colorBrandStroke2: "#b4befe",
 };

@@ -1,55 +1,57 @@
-/* Catppuccin Frappe — soothing professional dark theme for Preferred Square FMS */
+/* Catppuccin Mocha — definitive dark theme for Preferred Square FMS */
 :root {
-  /* Frappe palette */
+  /* Mocha palette */
   --color-white: #FFFFFF;
-  --color-dark-navy: #303446;        /* Frappe Base — main canvas */
-  --color-midnight-blue: #292c3c;    /* Frappe Mantle — recessed bg */
-  --color-royal-blue: #414559;       /* Frappe Surface0 — cards/panels */
-  --color-brand-blue: #8caaee;       /* Frappe Blue — PS primary */
-  --color-light-indigo: #babbf1;     /* Frappe Lavender — soft accent */
-  --color-delft-blue: #626880;       /* Frappe Surface2 — borders */
-  --color-sky-blue: #85c1dc;         /* Frappe Sapphire — info */
+  --color-dark-navy: #1e1e2e;        /* Mocha Base — main canvas */
+  --color-midnight-blue: #181825;    /* Mocha Mantle — recessed bg */
+  --color-royal-blue: #313244;       /* Mocha Surface0 — cards/panels */
+  --color-brand-blue: #89b4fa;       /* Mocha Blue — PS primary */
+  --color-light-indigo: #b4befe;     /* Mocha Lavender — soft accent */
+  --color-delft-blue: #6c7086;       /* Mocha Overlay0 — borders */
+  --color-sky-blue: #74c7ec;         /* Mocha Sapphire — info */
   --color-indigo: #4D018F;
-  --color-ps-purple: #ca9ee6;        /* Frappe Mauve — PS secondary brand */
-  --color-btn-primary: #4361ee;      /* Deep indigo — dark button, white text readable */
-  --color-btn-primary-hover: #3451d1;
-  --color-error-dark: #e78284;       /* Frappe Red */
-  --color-error-light: #ea999c;      /* Frappe Maroon */
-  --color-battleship-gray: #737994;  /* Frappe Overlay0 */
-  --color-lavender-mist: #a5adce;    /* Frappe Subtext0 */
+  --color-ps-purple: #cba6f7;        /* Mocha Mauve — PS secondary brand */
+  --color-btn-primary: #45475a;      /* Mocha Surface1 — dark button */
+  --color-btn-primary-hover: #585b70; /* Mocha Surface2 — hover lift */
+  --color-error-dark: #f38ba8;       /* Mocha Red */
+  --color-error-light: #eba0ac;      /* Mocha Maroon */
+  --color-battleship-gray: #9399b2;  /* Mocha Overlay2 */
+  --color-lavender-mist: #a6adc8;    /* Mocha Subtext0 */
+  --color-success: #a6e3a1;          /* Mocha Green */
+  --color-warning: #fab387;          /* Mocha Peach */
 
   /* Semantic */
   --bg-primary: var(--color-dark-navy);
   --bg-secondary: var(--color-midnight-blue);
   --bg-tertiary: var(--color-royal-blue);
-  --text-primary: #c6d0f5;           /* Frappe Text */
-  --text-secondary: var(--color-lavender-mist);
-  --border-color: rgba(98, 104, 128, 0.4);
+  --text-primary: #FFFFFF;
+  --text-secondary: #cdd6f4;         /* Mocha Text — secondary */
+  --border-color: rgba(108, 112, 134, 0.4);
   --accent-color: var(--color-light-indigo);
   --accent-hover: var(--color-brand-blue);
-  --success-color: var(--color-brand-blue);
+  --success-color: var(--color-success);
   --error-color: var(--color-error-dark);
-  --warning-color: var(--color-ps-purple);
+  --warning-color: var(--color-warning);
   --info-color: var(--color-sky-blue);
 
-  --success-bg: rgba(140, 170, 238, 0.12);
-  --success-text: var(--color-light-indigo);
-  --error-bg: rgba(231, 130, 132, 0.15);
+  --success-bg: rgba(166, 227, 161, 0.12);
+  --success-text: var(--color-success);
+  --error-bg: rgba(243, 139, 168, 0.15);
   --error-text: var(--color-error-light);
-  --warning-bg: rgba(202, 158, 230, 0.12);
-  --warning-text: var(--color-ps-purple);
-  --info-bg: rgba(133, 193, 220, 0.12);
+  --warning-bg: rgba(250, 179, 135, 0.12);
+  --warning-text: var(--color-warning);
+  --info-bg: rgba(116, 199, 236, 0.12);
   --info-text: var(--color-sky-blue);
 
-  --modal-overlay: rgba(35, 38, 52, 0.88);
-  --table-row-hover: rgba(140, 170, 238, 0.08);
-  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --modal-overlay: rgba(17, 17, 27, 0.88);
+  --table-row-hover: rgba(137, 180, 250, 0.08);
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 
   --icon-primary: var(--color-light-indigo);
   --icon-secondary: var(--text-secondary);
-  --icon-success: var(--color-brand-blue);
+  --icon-success: var(--color-success);
   --icon-error: var(--color-error-light);
-  --icon-warning: var(--color-ps-purple);
+  --icon-warning: var(--color-warning);
   --icon-info: var(--color-sky-blue);
 }
 
